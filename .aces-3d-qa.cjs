@@ -6,7 +6,7 @@ const http = require('node:http');
 const {createHash} = require('node:crypto');
 const {chromium} = require(path.join(os.tmpdir(),'aces-browser-qa','node_modules','playwright-core'));
 const baseDir = path.resolve('dist');
-const basePath = '/aces-website/';
+const basePath = process.env.ACES_QA_BASE ?? '/';
 const mime = {'.html':'text/html','.js':'text/javascript','.css':'text/css','.jpg':'image/jpeg','.webp':'image/webp','.ico':'image/x-icon','.woff2':'font/woff2'};
 const server = http.createServer((req,res) => {
   const item = new URL(req.url,'http://localhost').pathname;

@@ -9,9 +9,13 @@ npm ci
 npm run dev
 ```
 
-`npm run build` writes the static site to `dist/` with the GitHub Pages base path `/aces-website/`. Run `npm run preview` and open `/aces-website/` to test the production build. The development server uses `/`.
+`npm run build` writes the Netlify production build to `dist/` with asset URLs rooted at `/`. Run `npm run preview` to test it locally. For GitHub Pages, run `npm run build -- --mode pages` and `npm run preview -- --mode pages`, then open `/aces-website/`.
 
-The default social preview URL is `https://nxth-null01.github.io/aces-website/`. Set `VITE_SITE_URL` to a different HTTPS site URL if social previews need to point elsewhere.
+Social preview URLs default to the selected host. Set `VITE_SITE_URL` to a different HTTPS site URL if social previews need to point elsewhere.
+
+## Netlify
+
+The [Netlify build configuration](./netlify.toml) runs `npm run build` and publishes `dist`. In the Netlify project's **Project configuration → Environment variables**, set `VITE_WEB3FORMS_ACCESS_KEY` for the production build. A push to the linked production branch triggers a fresh build. The live site is [scst-aces.netlify.app](https://scst-aces.netlify.app/).
 
 ## GitHub Pages
 

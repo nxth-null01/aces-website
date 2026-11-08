@@ -2,6 +2,7 @@ import { defineConfig, loadEnv } from 'vite';
 
 const pagesBase = '/aces-website/';
 const pagesUrl = 'https://nxth-null01.github.io/aces-website/';
+const netlifyUrl = 'https://scst-aces.netlify.app/';
 const productionPolicy = [
   "default-src 'none'",
   "base-uri 'none'",
@@ -16,17 +17,17 @@ const productionPolicy = [
   "worker-src 'self'",
 ].join('; ');
 
-export default defineConfig(({ command, isPreview, mode }) => {
+export default defineConfig(({ command, mode }) => {
   const { VITE_SITE_URL, VITE_WEB3FORMS_ACCESS_KEY } = loadEnv(mode, process.cwd(), ['VITE_SITE_URL', 'VITE_WEB3FORMS_ACCESS_KEY']);
-  const production = command === 'build' || isPreview;
-  const siteUrl = VITE_SITE_URL ? new URL(VITE_SITE_URL) : new URL(pagesUrl);
+  const pages = mode === 'pages';
+  const siteUrl = new URL(VITE_SITE_URL || (pages ? pagesUrl : netlifyUrl));
   if (siteUrl.protocol !== 'https:' || siteUrl.username || siteUrl.password || siteUrl.search || siteUrl.hash) {
     throw new Error('VITE_SITE_URL must be an HTTPS site URL without credentials, query parameters, or a fragment.');
   }
   siteUrl.pathname = siteUrl.pathname.replace(/\/+$/, '') + '/';
 
   return {
-    base: production ? pagesBase : '/',
+    base: pages ? pagesBase : '/',
     envPrefix: [],
     define: {
       'import.meta.env.VITE_WEB3FORMS_ACCESS_KEY': JSON.stringify(VITE_WEB3FORMS_ACCESS_KEY?.trim() ?? ''),

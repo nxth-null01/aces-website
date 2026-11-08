@@ -1,0 +1,21 @@
+{
+  "name": "aces-static-website",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.2",
+    "lucide-react": "latest",
+    "motion": "^14.10.1",
+    "react": "latest",
+    "react-dom": "latest",
+    "three": "^0.187.0",
+    "vite": "latest"
+  }
+}

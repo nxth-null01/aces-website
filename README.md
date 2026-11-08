@@ -17,6 +17,8 @@ Social preview URLs default to the selected host. Set `VITE_SITE_URL` to a diffe
 
 The [Netlify build configuration](./netlify.toml) runs `npm run build` and publishes `dist`. In the Netlify project's **Project configuration → Environment variables**, set `VITE_WEB3FORMS_ACCESS_KEY` for the production build. A push to the linked production branch triggers a fresh build. The live site is [scst-aces.netlify.app](https://scst-aces.netlify.app/).
 
+Under **Project configuration → General → Powered by Netlify badge**, turn the badge off. [Netlify injects its badge at the edge](https://docs.netlify.com/manage/projects/powered-by-netlify-badge/#what-the-script-does-on-your-page), and its iframe contains an inline script that conflicts with the site's `script-src 'self'` policy. The setting applies without a redeploy; keep the script policy unchanged.
+
 ## GitHub Pages
 
 1. In the repository, open **Settings → Pages → Build and deployment → Source** and select **GitHub Actions**.
